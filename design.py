@@ -14,7 +14,9 @@ class Design_home:
         #Layout parte destra[output + input]
         self.layout_frame_right=[
             [sg.Output(size=(110,38), background_color=self.color_sottosfondo,text_color=self.color_text_general)],
-            [sg.InputText("",size=(110,0),background_color=self.color_sottosfondo,text_color=self.color_text_general)]
+            [sg.InputText("",size=(110,0),background_color=self.color_sottosfondo,text_color=self.color_text_general,key="_INPUT_"),sg.Button("Invia",size=(5,1),button_color=(self.color_text_general,self.color_sottosfondo),font=("Courier",10))],
+
+            
         ]
         #Bottoni vari
         self.layout_frame_left=[
@@ -30,6 +32,7 @@ class Design_home:
             [sg.Frame("",self.layout_frame_left,border_width=0,pad=(30,0),background_color=self.color_sfondo,),
              #Layout della casella principale(output+input)
              sg.Frame("",self.layout_frame_right,border_width=0,background_color=self.color_sfondo,)],
-            [sg.Button("Chiudi")],
+             #Bottone invia per inviare nella casella output, si trova affianco a quella output
+             [sg.Button("Chiudi")],
         ]
         self.window=sg.Window("MANAGER OF CIGARETS",size=(1400,800),location=(0,0),no_titlebar="True",background_color=self.color_sfondo).Layout(self.layout)

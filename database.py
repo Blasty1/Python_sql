@@ -7,7 +7,11 @@ while(1):
     evento,value=design_home.window.Read()
     if evento == 'Chiudi':
         break
-    elif evento == "Conteggio"
+    elif evento == "Conteggio":
+        print("L'ESKERE")
+    elif evento == "Invia":
+        print(value['_INPUT_'])
+        design_home.window.FindElement("_INPUT_").Update("")
 design_home.window.Close()
 
 
