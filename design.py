@@ -17,7 +17,7 @@ class Design_home:
         
          #Layout del frame del titolo  edella parte superiore della
         self.layout_frame_top=[
-            [sg.Text(self.title_name,size=(60,2),key="_TITLE"+self.title_name+"_",justification="center", background_color=self.color_sfondo,text_color=self.color_text_general,font=self.text_font_title)]
+            [sg.Text(self.title_name,size=(60,1),key="_TITLE"+self.title_name+"_",justification="center", background_color=self.color_sfondo,text_color=self.color_text_general,font=self.text_font_title)]
         ]
         #Layout parte destra[output + input]
         self.layout_frame_right=[
@@ -33,7 +33,7 @@ class Design_home:
             #text serve solamente per far abbassare i due bottoni nel layout, nulla di più.
             [sg.Text("",size=(60,2),background_color=self.color_sfondo)],
             [
-            sg.Button("Minimize",button_color=(self.color_text_general,self.color_sfondo),key="_MIN_", auto_size_button=True),
+            sg.Button("Minimize",button_color=(self.color_text_general,self.color_sfondo),key="_MIN_", auto_size_button=True,visible=False),
             sg.Button("Close",button_color=(self.color_text_general,self.color_sfondo),key="_CLOSE_",  auto_size_button=True),
             ]
         ]
@@ -53,4 +53,4 @@ class Design_home:
              #Bottone invia per inviare nella casella output, si trova affianco a quella output
              [sg.Frame("",self.layout_frame_bottom,border_width=0,background_color=self.color_sfondo,pad=(0,0))]
         ]
-        self.window=sg.Window("MANAGER OF CIGARETS",size=(1400,800),location=(0,0),no_titlebar=True,background_color=self.color_sfondo).Layout(self.layout)
+        self.window=sg.Window("MANAGER OF CIGARETS",size=(1366,768),location=(0,0),no_titlebar=True,background_color=self.color_sfondo).Layout(self.layout)
