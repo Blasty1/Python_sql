@@ -3,7 +3,7 @@ class Design_home:
     #title_name= nome pagina
     #size_put tuple o lista con size output e input, size_put[0]=size output , size_put[1] = size input
     #name_of_bottoni nomi da dare ai bottoni e le key,una lista composta da varie tuple, ognuna di essa rappresenta un bottone.La tuple è formata dal nome e poi dalla key del bottone.
-    def __init__(self,title_name,size_put,name_of_bottoni):
+    def __init__(self,title_name,size_put=0,name_of_bottoni=0):
         #colore del background
         self.color_sfondo="#ccffff" #Colore dello sfondo
         self.color_sottosfondo="#e6ffff" #colore dei bottoni e dell'input e output
@@ -17,14 +17,14 @@ class Design_home:
         
          #Layout del frame del titolo  edella parte superiore della
         self.layout_frame_top=[
-            [sg.Text(self.title_name,size=(60,1),key="_TITLE"+self.title_name+"_",justification="center", background_color=self.color_sfondo,text_color=self.color_text_general,font=self.text_font_title)]
+            [sg.Text(self.title_name,size=(60,2),key="_TITLE"+self.title_name+"_",justification="center", background_color=self.color_sfondo,text_color=self.color_text_general,font=self.text_font_title)]
         ]
         #Layout parte destra[output + input]
         self.layout_frame_right=[
             #casella output
             [sg.Output(size=self.size_put[0], background_color=self.color_sottosfondo,text_color=self.color_text_general)],
             #barra formata da input + bottone d'invio
-            [sg.InputText("",size=self.size_put[1],background_color=self.color_sottosfondo,text_color=self.color_text_general,key="_INPUT"+title_name+"_"),sg.Button("Invia",size=(5,1),button_color=(self.color_text_general,self.color_sottosfondo),font=("Courier",10))],
+            [sg.InputText("",size=self.size_put[1],background_color=self.color_sottosfondo,text_color=self.color_text_general,key="_INPUT"+self.title_name+"_"),sg.Button("Invia",size=(5,1),button_color=(self.color_text_general,self.color_sottosfondo),font=("Courier",10),key="_INVIO"+self.title_name+"_")],
 
             
         ]
@@ -52,5 +52,7 @@ class Design_home:
              sg.Frame("",self.layout_frame_right,border_width=0,background_color=self.color_sfondo,)],
              #Bottone invia per inviare nella casella output, si trova affianco a quella output
              [sg.Frame("",self.layout_frame_bottom,border_width=0,background_color=self.color_sfondo,pad=(0,0))]
+            
         ]
-        self.window=sg.Window("MANAGER OF CIGARETS",size=(1366,768),location=(0,0),no_titlebar=True,background_color=self.color_sfondo).Layout(self.layout)
+        self.window=sg.Window("MANAGER OF CIGARETS",size=(1400,800),location=(0,0),background_color=self.color_sfondo,return_keyboard_events=False).Layout(self.layout)
+   

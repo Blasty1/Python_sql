@@ -62,22 +62,15 @@ class connection():
             self.inserire_stecche_sigarette()
                 
     
-    #Inseriamo le sigarette che stiamo vendendo, una alla volta e creando ogni riga 
-    def inserire_sigarette_vendute(self):
-        y=0 #definiamo una variabile che servirà per prendere l'id della sigaretta.
+    #Inseriamo le sigarette che stiamo vendendo, una alla volta e creando ogni riga , value è il codice della sigaretta.
+    def inserire_sigarette_vendute(self,value):
         try:
-            while(1):
-                y=int(input("Inserisci l'id della sigaretta oppure '0' per chiudere:  "))
-                if y != 0:
-                    querye="INSERT INTO today(Id_sigarette) VALUES(%s)"
-                    self.cursor.execute(querye,(y,))
-                    self.conn.commit()
-                else:
-                    return 0
-        except ValueError:
-            print(ValueError)
-            print("Sigaretta non presente nei registri")
-            self.inserire_sigarette_vendute()
+            querye="INSERT INTO today(Id_sigarette) VALUES(%s)"
+            self.cursor.execute(querye,(value,))
+            self.conn.commit()
+        except:
+            return 0
+
             
     #Controllare le sigarette vendute giornalmente senza stampare nulla.
     def sigarette_vendute_giornalmente(self):
