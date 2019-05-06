@@ -6,7 +6,7 @@ class design_home:
         #Parametri grafica
         self.sfondo="#ff8c69"
         self.color_font="#FFFAFA"
-        self.spess_bordi=8
+        self.spess_bordi=10
         #Finestra principale
         self.window=tk.Tk()
         self.window.geometry("1360x760") #grandezza schermo
