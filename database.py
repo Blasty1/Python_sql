@@ -1,8 +1,9 @@
-from SQL import connection  #classe per tutte le funzioni database-programam
-from design import *#classe per la grafica
+import SQL  #classe per tutte le funzioni database-programam
+import design#classe per la grafica
+#connes
+conn=SQL.connection('uswJJmW75Q','bxBA2sMC7s','uswJJmW75Q','remotemysql.com')
 
-conn=connection('uswJJmW75Q','bxBA2sMC7s','uswJJmW75Q','remotemysql.com')
-window_principale=design_home(4,20,65,40,["Conteggio","Storico","Catalogo","Home"])
+window_principale=design.design_home(2,20,65,70,["Conteggio","Storico","Catalogo","Home"])
 
 #conn.write_tables()
 #conn.inserire_marche()
