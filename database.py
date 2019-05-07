@@ -3,8 +3,7 @@ import design#classe per la grafica
 #connessione al db
 conn=SQL.connection('uswJJmW75Q','bxBA2sMC7s','uswJJmW75Q','remotemysql.com')
 #creazione finestra principale
-window_principale=design.design_home(2,20,65,70,["Conteggio","Storico","Catalogo","Home"])
-
+window_principale=design.design_home(2,20,65,70,["Conteggio","Storico","Catalogo","Home"],1)
 #conn.write_tables()
 #conn.inserire_marche()
 #conn.eliminare_marche()
