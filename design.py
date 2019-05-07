@@ -1,7 +1,10 @@
 import tkinter as tk
 class design_home:
+    def info(self,):
+        self.label_home=tk.Label(text="eskere")
+        self.label_home.grid(row=1)
     #titolo[-1] titolo della pagina 
-    #titolo[0] in poi i vari titoli di bottoni 
+    #titolo[0] in poi i vari titoli di bottoni
     def __init__(self,h_button,w_button,padx,pady,titolo):
         #Parametri grafica
         self.sfondo="#ff8c69"
@@ -31,6 +34,7 @@ class design_home:
             self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font))
             #ancoriamo i singoli bottoni ad una colonna diversa pur rimanendo sulla stessa riga
             self.bottoni[x].grid(row=1,column=x,padx=self.padx_home,pady=self.pady_home)
+            
             
         
         
