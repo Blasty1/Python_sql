@@ -19,7 +19,7 @@ class design_home:
         self.w_button_home=w_button #width
         self.padx_home=padx #pad dalla tabella ascisse
         self.pady_home=pady#pad dalla tabella ordinata
-        self.font=("Times",14)
+        self.font=("Times",20)
         
         self.titolo=tk.Label(self.window,text=titolo[-1],fg=self.color_font,font=("Courier",40),bg=self.sfondo)
         self.titolo.grid(row=0,column=1)
