@@ -26,8 +26,12 @@ class design_home:
         
         #Lista di bottoni vari
         self.bottoni=[]
-        for x in range(len(titolo)-1):                        self.bottoni[x]=tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font)
-            self.bottoni[x].grid(row=1,column=0,padx=self.padx_home,pady=self.pady_home)
+        #Creiamo i bottoni, inserendoli nella lista che abbiamo precedentemente inizializzato
+        for x in range(len(titolo)-1):
+            self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font))
+            #ancoriamo i singoli bottoni ad una colonna diversa pur rimanendo sulla stessa riga
+            self.bottoni[x].grid(row=1,column=x,padx=self.padx_home,pady=self.pady_home)
+            
         
         
         self.window.mainloop()
