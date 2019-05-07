@@ -1,8 +1,8 @@
 import SQL  #classe per tutte le funzioni database-programam
 import design#classe per la grafica
-#connes
+#connessione al db
 conn=SQL.connection('uswJJmW75Q','bxBA2sMC7s','uswJJmW75Q','remotemysql.com')
-
+#creazione finestra principale
 window_principale=design.design_home(2,20,65,70,["Conteggio","Storico","Catalogo","Home"])
 
 #conn.write_tables()
