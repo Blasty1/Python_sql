@@ -1,5 +1,6 @@
 import tkinter as tk
 class design_home:
+    
     #Serve a far andare a capo il testo non appena incontra i bordi
     #text è il testo da inserire
     #spazio è la variabile che indica i caratteri che massimi da inserire in una label
@@ -30,12 +31,13 @@ class design_home:
             testo_rimpicciolito=self.aggiunta_spazio(text,40)
             self.label_home=tk.Label(text=testo_rimpicciolito[x],width=45,height=20,bg=self.sfondo,font=("Courier",9),fg=self.color_font,bd=6,relief="ridge")
             self.label_home.grid(row=2,column=x)
-            print(testo_rimpicciolito)
+
     
     #titolo[-1] titolo della pagina 
     #titolo[0] in poi i vari titoli di bottoni
     #home dovrà avere il valore 1 se ci troviamo nella home principale
-    def __init__(self,h_button,w_button,padx,pady,titolo,home):
+    #command è una lista di funzioni che andranno a essere conciliati ai bottoni
+    def __init__(self,h_button,w_button,padx,pady,titolo,home,command):
         #Parametri grafica
         self.sfondo="#ff8c69"
         self.color_font="#FFFAFA"
@@ -60,6 +62,7 @@ class design_home:
         self.padx_home=padx #pad dalla tabella ascisse
         self.pady_home=pady#pad dalla tabella ordinata
         self.font=("Times",20)
+        self.command=command #funzioni che andranno ad essere associate ai vari bottoni
         
         self.titolo=tk.Label(self.window,text=titolo[-1],fg=self.color_font,font=("Courier",40),bg=self.sfondo)
         self.titolo.grid(row=0,column=1)
@@ -68,7 +71,7 @@ class design_home:
         self.bottoni=[]
         #Creiamo i bottoni, inserendoli nella lista che abbiamo precedentemente inizializzato
         for x in range(len(titolo)-1):
-            self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font))
+            self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font,command=self.command[x]))
             #ancoriamo i singoli bottoni ad una colonna diversa pur rimanendo sulla stessa riga
             self.bottoni[x].grid(row=1,column=x,padx=self.padx_home,pady=self.pady_home)
         #se la pagina richiamata deve creare la home, allora home sarà uguale a 1 , se no sarà uguale a 0 e verrà ignorata la funzione
