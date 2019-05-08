@@ -6,10 +6,11 @@ class design_home:
         #Creazione della guida
         #inizializiamo la lista label home 
         self.label_home=[]
-        #creiamo le singole label che ci servono per i bottoni
+        #creiamo le singole label che ci servono per dare informazioni
         for x in range(len(text)):
-            self.label_home=tk.Label(text=text,width=50,height=20,bg=self.sfondo,font=("Courier",9),fg=self.color_font,bd=5)
-            self.label_home.grid(row=row)
+            
+            self.label_home=tk.Label(text=text[x],width=50,height=20,bg=self.sfondo,font=("Courier",9),fg=self.color_font,bd=5)
+            self.label_home.grid(row=2,column=x)
         
     #titolo[-1] titolo della pagina 
     #titolo[0] in poi i vari titoli di bottoni
@@ -45,7 +46,7 @@ class design_home:
             self.bottoni[x].grid(row=1,column=x,padx=self.padx_home,pady=self.pady_home)
         #se la pagina richiamata deve creare la home, allora home sarà uguale a 1 , se no sarà uguale a 0 e verrà ignorata la funzione
         if home == 1 :
-            self.info(["DHDHDSKJHDSJSDHSDJHDSKJSDHSDJK"])
+            self.info(["DHDHDSKJHDSJSDHSDJHDSKJSDHSDJK","dkjjdkhdjhjdfkfdhfd","Bruno è figo"])
             
         
         
