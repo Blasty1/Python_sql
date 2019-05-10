@@ -1,4 +1,5 @@
 import tkinter as tk
+#design della home con funzioni che serviranno anche alle altre classi
 class design_home:
     
     #Serve a far andare a capo il testo non appena incontra i bordi
@@ -31,24 +32,33 @@ class design_home:
             testo_rimpicciolito=self.aggiunta_spazio(text,40)
             self.label_home=tk.Label(text=testo_rimpicciolito[x],width=45,height=20,bg=self.sfondo,font=("Courier",9),fg=self.color_font,bd=6,relief="ridge")
             self.label_home.grid(row=2,column=x)
-
-    
+    #Crea una finestra generale e restituisce l'oggetto
+    #geometry [0]= lunghezza , geometry [1]= altezza
+    def creazione_default(self,geometry):
+        #Finestra principale
+        window=tk.Tk()
+        #recuperiamo e centriamo la finestra 
+        larghezza = window.winfo_screenwidth()  #otteniamo la lunghezza dello schermo
+        altezza = window.winfo_screenheight()# otteniamo l'altezza massima dello schermo
+        x = larghezza//2 - geometry[0]//2
+        y = altezza//2 - geometry[1]//2
+        window.geometry("%dx%d+%d+%d" % (geometry[0], geometry[1], x, y))
+        window.title("Sigarette Bryan") #titolo della finestra
+        window.resizable(False,False) #freeziamo la finestra, cosiche l'utente non puo muoverne le misure
+        window.configure(bg=self.sfondo)
+        return window
+        
+    #Parametri grafica
+    sfondo="#ff8c69"
+    color_font="#FFFAFA"
+    spess_bordi=10
+    font=("Times",20)
     #titolo[-1] titolo della pagina 
     #titolo[0] in poi i vari titoli di bottoni
     #home dovrà avere il valore 1 se ci troviamo nella home principale
     #command è una lista di funzioni che andranno a essere conciliati ai bottoni
-    def __init__(self,h_button,w_button,padx,pady,titolo,home,command):
-        #Parametri grafica
-        self.sfondo="#ff8c69"
-        self.color_font="#FFFAFA"
-        self.spess_bordi=10
-        #Finestra principale
-        self.window=tk.Tk()
-        self.window.geometry("1360x760") #grandezza schermo
-        self.window.title("Sigarette Bryan") #titolo della finestra
-        self.window.resizable(False,False) #freeziamo la finestra, cosiche l'utente non puo muoverne le misure
-        self.window.configure(bg=self.sfondo)
-        
+    def __init__(self,h_button,w_button,padx,pady,pad_title,titolo,command):
+        self.window=self.creazione_default((1360,760)) #creiamo la pagina di default
         #Testo presente per far capire il funzionamento di ogni singolo bottone
         self.guida=[
             "Registrazione delle sigarette vendute giornalmente, con la possibilità di scegliere se inserire le sigarette individualmente(INDIVIDUALE) oppure specificando i pacchetti venduti(MULTIPLI)",
@@ -61,26 +71,68 @@ class design_home:
         self.w_button_home=w_button #width
         self.padx_home=padx #pad dalla tabella ascisse
         self.pady_home=pady#pad dalla tabella ordinata
-        self.font=("Times",20)
         self.command=command #funzioni che andranno ad essere associate ai vari bottoni
+        self.pad_title=pad_title #padx = [0] e pady=[1] per il titolo
         
         self.titolo=tk.Label(self.window,text=titolo[-1],fg=self.color_font,font=("Courier",40),bg=self.sfondo)
-        self.titolo.grid(row=0,column=1)
+        self.titolo.grid(row=0,column=1,padx=self.pad_title[0],pady=self.pad_title[1])
         
         #Lista di bottoni vari
         self.bottoni=[]
         #Creiamo i bottoni, inserendoli nella lista che abbiamo precedentemente inizializzato
         for x in range(len(titolo)-1):
             self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button_home,width=self.w_button_home,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font,command=self.command[x]))
-            #ancoriamo i singoli bottoni ad una colonna diversa pur rimanendo sulla stessa riga
+            #Se ci troviamo nella home imponiamo i  bottoni sulla stessa riga[1] se no su righe diverse e sulla stessa colonna.           
             self.bottoni[x].grid(row=1,column=x,padx=self.padx_home,pady=self.pady_home)
         #se la pagina richiamata deve creare la home, allora home sarà uguale a 1 , se no sarà uguale a 0 e verrà ignorata la funzione
-        if home == 1 :
             self.info(self.guida)
+        self.window.mainloop() #manteniamo aperta la finestra
+        
+#classe utile per le finestre ramificate 
+class sotto_finestre(design_home):    
+#h_button height
+#w_button width
+#pad button è una lista , padx[0] e pady[1]
+#pad_title lista padx[0] e pady[1]
+#command è una lista composta da funzioni che devono attivarsi quando schiacciamo un pulsante       
+    def __init__(self,h_button,w_button,pad_button,pad_title,titolo,command):
+        #parametri bottoni
+        self.h_button=h_button
+        self.w_button=w_button
+        self.pad_button=pad_button
+        self.pad_title=pad_title
+        self.command=command
+    
+        self.window=self.creazione_default((1360,760)) #creiamo la finestra
+        #titolo
+        self.titolo=tk.Label(self.window,text=titolo[-1],fg=self.color_font,font=("Courier",40),bg=self.sfondo)
+        self.titolo.pack(padx=self.pad_title[0],pady=self.pad_title[1])
+        
+        #finestra dei bottoni
+        self.bottoni=[]
+        #creazione dei bottoni tutti di lato a sinistra
+        for x in range(len(titolo)-1):              
+            self.bottoni.append(tk.Button(self.window,text=titolo[x],height=self.h_button,width=self.w_button,bg=self.sfondo,relief="ridge",bd=self.spess_bordi,fg=self.color_font,font=self.font,command=self.command[x]))
+            self.bottoni[x].pack(padx=self.pad_button[0],pady=self.pad_button[1])
+        
+            
+        self.window.mainloop()#mantieni la finestra aperta
+        
+#classe riguardante l'input dei dati e l'output, con tanto di finestra temporanea
+class input_output(design_home):
+    #una lista composta da [0] = x e [1]= y
+    def __init__(self,dimensioni):
+        self.dimen=dimensioni
+        self.window=self.creazione_default(self.dimen)
+        self.entry_text=tk.Entry(self.window,text="scrivi qui")
+        self.entry_text.grid(row=0,column=0,padx=self.dimen[0]/2)
+        self.window.mainloop()
+        
+        
             
         
         
-        self.window.mainloop()
+ 
 
 
    
