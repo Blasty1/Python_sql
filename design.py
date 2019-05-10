@@ -124,8 +124,10 @@ class input_output(design_home):
     def __init__(self,dimensioni):
         self.dimen=dimensioni
         self.window=self.creazione_default(self.dimen)
-        self.entry_text=tk.Entry(self.window,text="scrivi qui")
-        self.entry_text.grid(row=0,column=0,padx=self.dimen[0]/2)
+        self.entry_text=tk.Entry(self.window,width=30)
+        self.test=self.dimen[0]/2.8
+        print(self.test)
+        self.entry_text.grid(row=0,column=0,padx=self.test)
         self.window.mainloop()
         
         
