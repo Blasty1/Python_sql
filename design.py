@@ -120,14 +120,34 @@ class sotto_finestre(design_home):
         
 #classe riguardante l'input dei dati e l'output, con tanto di finestra temporanea
 class input_output(design_home):
-    #una lista composta da [0] = x e [1]= y
-    def __init__(self,dimensioni):
+    #una lista composta da [0] = x e [1]= y aventi le dimensioni per creare la finestra
+    #inp_outp lista di dimensioni utili alla costruzioni di label di output e di barre di input
+    #inp_outp[0] dimensione input/output width, primo numero input secondo output
+    #input_outp[1] dimensione output height
+    def __init__(self,dimensioni,inp_outp):
         self.dimen=dimensioni
-        self.window=self.creazione_default(self.dimen)
-        self.entry_text=tk.Entry(self.window,width=30)
-        self.test=self.dimen[0]/2.8
-        print(self.test)
-        self.entry_text.grid(row=0,column=0,padx=self.test)
+        self.io=inp_outp
+        self.window=self.creazione_default(self.dimen)#creazione finestra
+        #Centrare cella
+        self.centr=self.dimen[0]-self.io[0]*6.15
+        #creazone output 
+        self.output_text=tk.Label(self.window,text="",height=self.io[1],width=self.io[0][1],bd=5,font=self.font,bg=self.sfondo,relief="ridge",fg=self.color_font)
+        self.output_text.grid(row=0,column=0,padx=int(self.centr/2))
+        print(self.centr/2)
+        
+        
+        #FRAME INPUT
+        #Creiamo il frame e regoliamo il pad della colonna di conseguenza
+        self.frame_o= tk.Frame(self.window, bg=self.sfondo)
+        self.frame_o.grid(row=1,column=0)
+    
+        #creazione riga input
+        self.entry_text=tk.Entry(self.frame_o,width=self.io[0][0])
+        self.entry_text.grid(row=1,column=0)#/2 per centrarlo
+      
+        self.button1=tk.Button(self.frame_o,text="invio",width=5,bg=self.sfondo,relief="ridge",bd=3,fg=self.color_font,font=("Helvete",8))
+        self.button1.grid(row=1,column=0,sticky="e")
+        
         self.window.mainloop()
         
         
