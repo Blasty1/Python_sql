@@ -118,22 +118,30 @@ class sotto_finestre(design_home):
             
         self.window.mainloop()#mantieni la finestra aperta
         
+class funzioni_i_o():
+    #field_inp è il campo dell'input
+    #field_out è dove verrà mostrato il messaggio 
+        def input_output_testo(self,field_inp,field_out):
+            self.test=bottone.gets()
+            field_input.configure(text=self.test)
+        
+    
 #classe riguardante l'input dei dati e l'output, con tanto di finestra temporanea
 class input_output(design_home):
     #una lista composta da [0] = x e [1]= y aventi le dimensioni per creare la finestra
     #inp_outp lista di dimensioni utili alla costruzioni di label di output e di barre di input
     #inp_outp[0] dimensione input/output width, primo numero input secondo output
     #input_outp[1] dimensione output height
-    def __init__(self,dimensioni,inp_outp):
+    def __init__(self,dimensioni,inp_outp,command):
         self.dimen=dimensioni
         self.io=inp_outp
         self.window=self.creazione_default(self.dimen)#creazione finestra
         #Centrare cella
-        self.centr=self.dimen[0]-self.io[0]*6.15
+        self.centr=self.dimen[0]-self.io[0][0]*7
         #creazone output 
         self.output_text=tk.Label(self.window,text="",height=self.io[1],width=self.io[0][1],bd=5,font=self.font,bg=self.sfondo,relief="ridge",fg=self.color_font)
-        self.output_text.grid(row=0,column=0,padx=int(self.centr/2))
-        print(self.centr/2)
+        self.output_text.grid(row=0,column=0,padx=int(self.centr/2),pady=10)
+
         
         
         #FRAME INPUT
@@ -144,11 +152,14 @@ class input_output(design_home):
         #creazione riga input
         self.entry_text=tk.Entry(self.frame_o,width=self.io[0][0])
         self.entry_text.grid(row=1,column=0)#/2 per centrarlo
-      
-        self.button1=tk.Button(self.frame_o,text="invio",width=5,bg=self.sfondo,relief="ridge",bd=3,fg=self.color_font,font=("Helvete",8))
-        self.button1.grid(row=1,column=0,sticky="e")
+
+        #creazione bottone invia
+        #self.io[0][0] è la lunghezza dell'input , che diviso due ci darà la lunghezza del bottone.
+        self.button1=tk.Button(self.frame_o,text="Invio",width=self.io[0][0]//2,bg=self.sfondo,relief="ridge",bd=3,fg=self.color_font,font=("Helvete",8),command=command(self.entry_text,self.output_text))
+        self.button1.grid(row=2,column=0,pady=10)
         
         self.window.mainloop()
+        
         
         
             
