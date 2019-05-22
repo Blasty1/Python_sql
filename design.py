@@ -5,9 +5,12 @@ class design_home:
     #Serve a far andare a capo il testo non appena incontra i bordi
     #text è il testo da inserire
     #spazio è la variabile che indica i caratteri che massimi da inserire in una label
-    def aggiunta_spazio(self,text,spazio):
+    def aggiunta_spazio(self,text,spazio,home=1):
         #Semplicemente inizializziamo una nuova stringa per poterla restituira a fine funzione
-        nuova_stringa=["","",""]
+        if home == 1:
+            nuova_stringa=["","",""]
+        else:
+            nuova_stringa=[""]
         #prendiamo ogni singolo elemento della lista
         for x in range(len(text)):
             #Utilizzato come indice per calcolare quante volte deve essere moltiplicato il numero del testo
@@ -32,6 +35,7 @@ class design_home:
             testo_rimpicciolito=self.aggiunta_spazio(text,40)
             self.label_home=tk.Label(text=testo_rimpicciolito[x],width=45,height=20,bg=self.sfondo,font=("Courier",9),fg=self.color_font,bd=6,relief="ridge")
             self.label_home.grid(row=2,column=x)
+    
     #Crea una finestra generale e restituisce l'oggetto
     #geometry [0]= lunghezza , geometry [1]= altezza
     def creazione_default(self,geometry):
@@ -117,22 +121,20 @@ class sotto_finestre(design_home):
         
             
         self.window.mainloop()#mantieni la finestra aperta
-        
-class funzioni_i_o():
-    #field_inp è il campo dell'input
-    #field_out è dove verrà mostrato il messaggio 
-        def input_output_testo(self,field_inp,field_out):
-            self.test=bottone.gets()
-            field_input.configure(text=self.test)
-        
-    
-#classe riguardante l'input dei dati e l'output, con tanto di finestra temporanea
+            
+#classe riguardante l'input dei dati e l'output, con tanto di finestra temporanea     
 class input_output(design_home):
+     #serve per mostrare in oupt ciò che viene scritto nell'input
+    #field_inp.delete serve a eliminare il testo che abbiamo scritto nell'input dopo averlo inviato
+    def input_output_testo(self,field_inp,field_out):
+        self.testo=field_inp.get()
+        field_out.config(text=self.testo)
+        field_inp.delete(0,12222)
     #una lista composta da [0] = x e [1]= y aventi le dimensioni per creare la finestra
     #inp_outp lista di dimensioni utili alla costruzioni di label di output e di barre di input
     #inp_outp[0] dimensione input/output width, primo numero input secondo output
     #input_outp[1] dimensione output height
-    def __init__(self,dimensioni,inp_outp,command):
+    def __init__(self,dimensioni,inp_outp):
         self.dimen=dimensioni
         self.io=inp_outp
         self.window=self.creazione_default(self.dimen)#creazione finestra
@@ -143,7 +145,6 @@ class input_output(design_home):
         self.output_text.grid(row=0,column=0,padx=int(self.centr/2),pady=10)
 
         
-        
         #FRAME INPUT
         #Creiamo il frame e regoliamo il pad della colonna di conseguenza
         self.frame_o= tk.Frame(self.window, bg=self.sfondo)
@@ -152,14 +153,13 @@ class input_output(design_home):
         #creazione riga input
         self.entry_text=tk.Entry(self.frame_o,width=self.io[0][0])
         self.entry_text.grid(row=1,column=0)#/2 per centrarlo
-
+        self.command=lambda:self.input_output_testo(self.entry_text,self.output_text)
         #creazione bottone invia
         #self.io[0][0] è la lunghezza dell'input , che diviso due ci darà la lunghezza del bottone.
-        self.button1=tk.Button(self.frame_o,text="Invio",width=self.io[0][0]//2,bg=self.sfondo,relief="ridge",bd=3,fg=self.color_font,font=("Helvete",8),command=command(self.entry_text,self.output_text))
+        self.button1=tk.Button(self.frame_o,text="Invio",width=self.io[0][0]//2,bg=self.sfondo,relief="ridge",bd=3,fg=self.color_font,font=("Helvete",8),command=self.command)
         self.button1.grid(row=2,column=0,pady=10)
         
         self.window.mainloop()
-        
         
         
             
