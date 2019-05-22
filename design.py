@@ -5,12 +5,10 @@ class design_home:
     #Serve a far andare a capo il testo non appena incontra i bordi
     #text è il testo da inserire
     #spazio è la variabile che indica i caratteri che massimi da inserire in una label
-    def aggiunta_spazio(self,text,spazio,home=1):
+    def aggiunta_spazio(self,text,spazio):
         #Semplicemente inizializziamo una nuova stringa per poterla restituira a fine funzione
-        if home == 1:
-            nuova_stringa=["","",""]
-        else:
-            nuova_stringa=[""]
+        nuova_stringa=["","",""]
+   
         #prendiamo ogni singolo elemento della lista
         for x in range(len(text)):
             #Utilizzato come indice per calcolare quante volte deve essere moltiplicato il numero del testo
@@ -140,9 +138,18 @@ class input_output(design_home):
         self.window=self.creazione_default(self.dimen)#creazione finestra
         #Centrare cella
         self.centr=self.dimen[0]-self.io[0][0]*7
-        #creazone output 
-        self.output_text=tk.Label(self.window,text="",height=self.io[1],width=self.io[0][1],bd=5,font=self.font,bg=self.sfondo,relief="ridge",fg=self.color_font)
-        self.output_text.grid(row=0,column=0,padx=int(self.centr/2),pady=10)
+        
+        #FRAME OUTPUT
+        #creiamo il frame contenente l'ouput che è formato da varie label
+        self.frame_output=tk.Frame(self.window,height=self.io[1],width=int(self.io[0][1]),bd=5,bg=self.sfondo,relief="ridge")
+        self.frame_output.grid(row=0,column=0,padx=int(self.centr/2),pady=10)
+        
+        #Creiamo riga output
+        self.output_text=tk.Label(self.frame_output,text="Bau",bd=0,height=7,width=32,bg=self.sfondo)
+        self.output_text.grid(row=0,column=0)
+      
+        
+        #Creazione
 
         
         #FRAME INPUT
