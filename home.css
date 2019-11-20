@@ -1,0 +1,18 @@
+window,headerbar{
+        background: rgb(204, 255, 204);
+        border: rgb(204, 255, 204);
+}
+button{
+        background: rgb(255, 255, 204);
+}
+#label_button_h{
+
+        color:black;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        font-size: 15px;
+        
+}
+#title_home{
+        font-size: 20px;
+        font-family:"Comic Sans MS", cursive, sans-serif;
+}
